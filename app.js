@@ -64,6 +64,38 @@ app.get('/delete/:id',async (req,res)=>{
     await deleteProduct(id)
     res.redirect('/')
 })
+
+app.get('/edit/:id',async (req,res)=>{
+    //vd id: 641278ff496eca772d08460f
+    const id = req.params.id
+    //1.ket noi den database server voi dia chi la url
+    let client = await MongoClient.connect(url);
+    //2.truy cap database GCH1006
+    let dbo = client.db("GCH1006")
+    //tim sp co id o tren
+    //xoa 
+    var ObjectId = require('mongodb').ObjectId
+    const product = await
+        dbo.collection('products').findOne({_id: new ObjectId(id)})
+    res.render('edit',{'product':product})
+})
+
+app.post('/editProduct',async (req,res)=>{
+    const id = req.body.id
+    const name = req.body.txtName
+    const price = req.body.txtPrice
+    let product = {
+        'name': name,
+        'price': price
+    }
+    var ObjectId = require('mongodb').ObjectId
+    let client = await MongoClient.connect(url);
+    let dbo = client.db("GCH1006")
+    await dbo.collection('products').updateOne({_id: new ObjectId(id)},{$set : product})
+    res.redirect('/findAll')
+
+})
+
 async function deleteProduct(id){
      //1.ket noi den database server voi dia chi la url
      let client = await MongoClient.connect(url);
@@ -73,6 +105,7 @@ async function deleteProduct(id){
      var ObjectId = require('mongodb').ObjectId
      await dbo.collection('products').deleteOne({_id: new ObjectId(id)})
 }
+
 
 const PORT =process.env.PORT || 3000
 app.listen(PORT,()=>{
