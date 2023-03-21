@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add product</title>
+    <title>Edit product</title>
 </head>
 <body>
     <form action="/editProduct" method="post">
     <input type="hidden" name="id" value="{{product._id}}">
-        Name <input type="text" name="txtName">
+        Name <input type="text" name="txtName" value="{{product.name}}">
         <span style="color: red;"> {{nameError}}</span>
        
         <br>
-        Price <input type="text" name="txtPrice" >
+        Price <input type="text" name="txtPrice" value="{{product.price}}">
         <br>
-        <input type="submit" value="Save Product">
+        <input type="submit" value="Save Edit">
     </form>
 </body>
 </html>

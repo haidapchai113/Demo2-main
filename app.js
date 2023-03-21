@@ -20,6 +20,7 @@ app.post('/addProduct',async (req,res)=>{
     console.log(req.body)
     const name = req.body.txtName
     const price = Number.parseFloat(req.body.txtPrice)
+    
     //kiem tra du lieu hop le truoc khi add
     if(name.length <5){
         res.render('addProduct',{nameError: 'Ten phai lon hon 4 ky tu!'})
@@ -84,9 +85,11 @@ app.post('/editProduct',async (req,res)=>{
     const id = req.body.id
     const name = req.body.txtName
     const price = req.body.txtPrice
+    const picture = req.body.txtPicture
     let product = {
         'name': name,
-        'price': price
+        'price': price,
+        'picture': picture
     }
     var ObjectId = require('mongodb').ObjectId
     let client = await MongoClient.connect(url);
