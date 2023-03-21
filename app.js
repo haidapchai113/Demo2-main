@@ -2,7 +2,7 @@ const express = require('express');
 const app = express()
 
 //duong dan den database
-const url = 'mongodb+srv://tommy:12345654321@cluster0.lkrga.mongodb.net/test'
+const url = 'mongodb+srv://haingao05082002:haidapchai113@cluster0.axwqupj.mongodb.net/test'
 //import thu vien MongoDB
 const MongoClient = require('mongodb').MongoClient;
 
